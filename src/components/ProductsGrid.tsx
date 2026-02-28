@@ -7,7 +7,7 @@ interface IProductsProps {
 
 export default function ProductsGrid({ products }: IProductsProps) {
   return (
-    <div className="grid grid-cols-3 gap-2 max-w-4xl px-4 mx-auto">
+    <div className="grid grid-cols-4 gap-2 px-4 mx-auto">
       {products.map((product) => (
         <Product key={product.id} product={product} />
       ))}

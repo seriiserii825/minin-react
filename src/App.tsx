@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
 import Preloader from "./components/Preloader";
@@ -9,6 +9,7 @@ import type { IProductResponse } from "./interfaces/IProductResponse";
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<string>("");
 
   useEffect(() => {
     fetchProducts();
@@ -19,8 +20,9 @@ function App() {
     try {
       const res = await axios.get<IProductResponse>("https://dummyjson.com/products");
       setProducts(res.data.products);
-    } catch (error) {
-      console.log(error, "error");
+    } catch (e: unknown) {
+      const error = e as AxiosError;
+      setIsError(error.message);
     } finally {
       setTimeout(() => {
         setIsLoading(false);
@@ -28,8 +30,11 @@ function App() {
     }
   }
   return (
-    <div className="flex justify-center items-center w-screen  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-      {isLoading ? <Preloader /> : <ProductsGrid products={products} />}
+    <div className="w-screen pt-24  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+      <div className="container mx-auto">
+        {isLoading ? <Preloader /> : <ProductsGrid products={products} />}
+        {isError && <p className="text-white text-center font-bold">{isError}</p>}
+      </div>
     </div>
   );
 }
