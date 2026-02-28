@@ -1,9 +1,10 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
-import axios from "axios";
-import type { IProductResponse } from "./interfaces/IProductResponse";
-import type { IProduct } from "./interfaces/IProduct";
+import Preloader from "./components/Preloader";
 import ProductsGrid from "./components/ProductsGrid";
+import type { IProduct } from "./interfaces/IProduct";
+import type { IProductResponse } from "./interfaces/IProductResponse";
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -28,7 +29,7 @@ function App() {
   }
   return (
     <div className="flex justify-center items-center w-screen  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-      {isLoading ? "Loading..." : <ProductsGrid products={products} />}
+      {isLoading ? <Preloader /> : <ProductsGrid products={products} />}
     </div>
   );
 }
