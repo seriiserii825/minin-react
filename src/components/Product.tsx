@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { IProduct } from "../interfaces/IProduct";
 import formatPrice from "../utils/formatPrice";
 
@@ -6,6 +7,23 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  const [isVisibleDetails, setIsVisibleDetails] = useState(false);
+
+  const btnClassName = isVisibleDetails
+    ? "bg-indigo-600 text-white hover:bg-indigo-700 hover:text-white"
+    : "text-indigo-600 hover:bg-indigo-600 hover:text-white";
+
+  const btnClasses = [
+    "text-sm",
+    "transition-all",
+    "cursor-pointer",
+    "self-start",
+    "border",
+    "py-1",
+    "px-2",
+    btnClassName,
+  ];
+
   return (
     <div className="group relative w-full max-w-xs sm:max-w-sm bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200">
       <div className="relative h-64 overflow-hidden bg-gray-50">
@@ -24,23 +42,30 @@ export default function Product({ product }: ProductProps) {
         <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 min-h-[3rem]">
           {product.title}
         </h3>
+        <button
+          onClick={() => setIsVisibleDetails(!isVisibleDetails)}
+          className={btnClasses.join(" ")}>
+          {isVisibleDetails ? "Hide details" : "Show details"}
+        </button>
 
-        <p className="text-sm text-gray-600">{product.description}</p>
-
-        <div className="flex items-center gap-2">
-          <div className="flex items-center">
-            <span className="text-yellow-400 text-lg">★★★★☆</span>
-          </div>
-          <span className="text-sm text-gray-500">
-            {product.rating} • {product.reviews.length} reviews
-          </span>
-        </div>
+        {isVisibleDetails && (
+          <>
+            <p className="text-sm text-gray-600">{product.description}</p>
+            <div className="flex items-center gap-2">
+              <div className="flex items-center">
+                <span className="text-yellow-400 text-lg">★★★★☆</span>
+              </div>
+              <span className="text-sm text-gray-500">
+                {product.rating} • {product.reviews.length} reviews
+              </span>
+            </div>
+          </>
+        )}
 
         <div className="flex items-center justify-between mt-2">
           <div className="flex flex-col">
             <span className="text-2xl font-bold text-gray-900">{formatPrice(product.price)}</span>
           </div>
-
           <button className="btn btn-primary">Add to cart</button>
         </div>
       </div>

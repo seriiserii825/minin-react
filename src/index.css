@@ -71,3 +71,7 @@
     @apply px-6 py-3 text-lg font-semibold;
   }
 }
+
+button {
+  @apply cursor-pointer;
+}
