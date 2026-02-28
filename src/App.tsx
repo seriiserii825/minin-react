@@ -1,11 +1,11 @@
+import "./App.css";
+
 function App() {
   return (
-    <>
-      Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor
-      invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-      justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-      ipsum dolor sit amet.
-    </>
+    <div className="flex w-screen flex-col h-screen items-center justify-center bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+      <h1 className="text-4xl font-bold text-white">Hello, World!</h1>
+      <p className="mt-4 text-lg text-white">Welcome to your React app with Tailwind CSS!</p>
+    </div>
   );
 }
 
