@@ -7,7 +7,9 @@ function App() {
   return (
     <div className="flex justify-center items-center w-screen  h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
       <div className="grid grid-cols-3 gap-2 max-w-4xl px-4 mx-auto">
-        <Product product={products[0]} />
+        {products.map((product) => (
+          <Product key={product.id} product={product} />
+        ))}
       </div>
     </div>
   );
