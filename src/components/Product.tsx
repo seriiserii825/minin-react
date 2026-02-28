@@ -41,9 +41,7 @@ export default function Product({ product }: ProductProps) {
             <span className="text-2xl font-bold text-gray-900">{formatPrice(product.price)}</span>
           </div>
 
-          <button className="flex items-center gap-2 bg-indigo-400 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-300">
-            Add to cart
-          </button>
+          <button className="btn btn-primary">Add to cart</button>
         </div>
       </div>
     </div>
