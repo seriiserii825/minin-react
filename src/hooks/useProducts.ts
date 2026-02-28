@@ -6,6 +6,7 @@ export default function useProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isError, setIsError] = useState<string>("");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 
   useEffect(() => {
     fetchProducts();
@@ -25,5 +26,5 @@ export default function useProducts() {
       }, 1000);
     }
   }
-  return { products, isLoading, isError };
+  return { products, isLoading, isError, isModalOpen, setIsModalOpen };
 }

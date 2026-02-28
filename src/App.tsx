@@ -1,11 +1,12 @@
 import "./App.css";
+import CreateProduct from "./components/CreateProduct";
 import Modal from "./components/Modal";
 import Preloader from "./components/Preloader";
 import ProductsGrid from "./components/ProductsGrid";
 import useProducts from "./hooks/useProducts";
 
 function App() {
-  const { products, isLoading, isError } = useProducts();
+  const { products, isLoading, isError, isModalOpen, setIsModalOpen } = useProducts();
 
   return (
     <div className="w-screen pt-24  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
@@ -13,7 +14,11 @@ function App() {
         {isLoading ? <Preloader /> : <ProductsGrid products={products} />}
         {isError && <p className="text-white text-center font-bold">{isError}</p>}
       </div>
-      <Modal />
+      {isModalOpen && (
+        <Modal title="Create New Product">
+          <CreateProduct onCreate={() => setIsModalOpen(false)} />
+        </Modal>
+      )}
     </div>
   );
 }
