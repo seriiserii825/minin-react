@@ -1,16 +1,34 @@
+import { useEffect, useState } from "react";
 import "./App.css";
-import Product from "./components/Product";
-import { products } from "./data/products_data";
-// https://dummyjson.com/products
+import axios from "axios";
+import type { IProductResponse } from "./interfaces/IProductResponse";
+import type { IProduct } from "./interfaces/IProduct";
+import ProductsGrid from "./components/ProductsGrid";
 
 function App() {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  async function fetchProducts() {
+    setIsLoading(true);
+    try {
+      const res = await axios.get<IProductResponse>("https://dummyjson.com/products");
+      setProducts(res.data.products);
+    } catch (error) {
+      console.log(error, "error");
+    } finally {
+      setTimeout(() => {
+        setIsLoading(false);
+      }, 1000);
+    }
+  }
   return (
-    <div className="flex justify-center items-center w-screen  h-screen bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
-      <div className="grid grid-cols-3 gap-2 max-w-4xl px-4 mx-auto">
-        {products.map((product) => (
-          <Product key={product.id} product={product} />
-        ))}
-      </div>
+    <div className="flex justify-center items-center w-screen  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+      {isLoading ? "Loading..." : <ProductsGrid products={products} />}
     </div>
   );
 }
