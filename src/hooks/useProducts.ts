@@ -14,7 +14,7 @@ export default function useProducts() {
   async function fetchProducts() {
     setIsLoading(true);
     try {
-      const res = await axios.get<IProductResponse>("https://dummyjson.com/products");
+      const res = await axios.get<IProductResponse>("https://dummyjson.com/products?limit=12");
       setProducts(res.data.products);
     } catch (e: unknown) {
       const error = e as AxiosError;
