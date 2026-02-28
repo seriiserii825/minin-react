@@ -1,4 +1,5 @@
 import "./App.css";
+import Modal from "./components/Modal";
 import Preloader from "./components/Preloader";
 import ProductsGrid from "./components/ProductsGrid";
 import useProducts from "./hooks/useProducts";
@@ -12,6 +13,7 @@ function App() {
         {isLoading ? <Preloader /> : <ProductsGrid products={products} />}
         {isError && <p className="text-white text-center font-bold">{isError}</p>}
       </div>
+      <Modal />
     </div>
   );
 }

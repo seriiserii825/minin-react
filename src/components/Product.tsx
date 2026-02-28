@@ -66,7 +66,7 @@ export default function Product({ product }: ProductProps) {
           <div className="flex flex-col">
             <span className="text-2xl font-bold text-gray-900">{formatPrice(product.price)}</span>
           </div>
-          <button className="btn btn-sm btn-primary">Add to cart</button>
+          <button className="btn btn-sm btn-primary">View</button>
         </div>
       </div>
     </div>
