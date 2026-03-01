@@ -9,9 +9,13 @@ function App() {
   const { products, isLoading, isError, isModalOpen, setIsModalOpen } = useProducts();
 
   return (
-    <div className="w-screen pt-24  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
+    <div className="pt-24  min-h-screen py-24 bg-gradient-to-r from-purple-400 via-pink-500 to-red-500">
       <div className="container mx-auto">
-        {isLoading ? <Preloader /> : <ProductsGrid products={products} />}
+        {isLoading ? (
+          <Preloader />
+        ) : (
+          <ProductsGrid createProduct={() => setIsModalOpen(true)} products={products} />
+        )}
         {isError && <p className="text-white text-center font-bold">{isError}</p>}
       </div>
       {isModalOpen && (

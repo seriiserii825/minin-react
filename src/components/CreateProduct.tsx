@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState } from "react";
 
 interface CreateProductProps {
@@ -7,14 +8,30 @@ interface CreateProductProps {
 export default function CreateProduct({ onCreate }: CreateProductProps) {
   const [value, setValue] = useState("");
 
-  function submitHandler(e: React.FormEvent) {
+  async function createProductApi() {
+    try {
+      const res = await axios.post("https://dummyjson.com/products/add", {
+        title: value,
+      });
+      console.log(res, "res");
+    } catch (error) {
+      console.log(error, "error");
+    }
+  }
+
+  async function submitHandler(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Product created!");
+
+    if (!value.trim()) {
+      alert("Product name cannot be empty");
+      return;
+    }
+
+    await createProductApi();
     onCreate();
   }
   return (
     <form onSubmit={submitHandler}>
-      <span>{value}</span>
       <input
         type="text"
         value={value}
