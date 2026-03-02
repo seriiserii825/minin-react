@@ -1,4 +1,4 @@
-export default function SingleProduct() {
+export default function SingleProductPage() {
   return (
     <div>
       <div className="max-w-6xl mx-auto p-6">
